@@ -1,4 +1,4 @@
-# Avalon A10 矿机 API说明手册 v0.2
+# Avalon A10 矿机 API说明手册 v0.3
 
 
 
@@ -10,6 +10,7 @@
 | ------ | ---------- | ------------------------------------------------------------ |
 | v0.1   | 2019-8-31  | 创建文档。                                                   |
 | v0.2   | 2019-10-12 | 增加新的API说明，并增加使用场景说明和返回数据举例说明。同时增加了本机支持的常用的CGMiner API说明。 |
+| v0.3   | 2019-11-08 | 增加对estats的废除说明。                                     |
 
 
 
@@ -123,9 +124,9 @@ pool success set to stratum+tcp://btc.ss.poolin.com:443<br />worker is cctrix.00
 | 使用场景                | 需要查询矿机工作信息汇总时，调用此接口。可以得到矿机运行时间（Elapsed）、1分钟、5分钟、15分钟的平均算力值，矿池接受和拒绝的工作数量等信息，详细见下文返回信息举例。 |
 | 返回信息举例            | SUMMARY,Elapsed=17994,MHS av=51278810.20,MHS 30s=51423478.12,MHS 1m=51209334.97,MHS 5m=51088640.16,MHS 15m=51312058.99,Found Blocks=0,Getworks=669,Accepted=1740,Rejected=2,Hardware Errors=10,Utility=5.80,Discarded=0,Stale=0,Get Failures=0,Local Work=419458,Remote Failures=0,Network Blocks=24,Total MH=921456687985.0000,Work Utility=716041.36,Difficulty Accepted=211156992.00000000,Difficulty Rejected=196608.00000000,Difficulty Stale=0.00000000,Best Share=459832747,Device Hardware%=0.0000,Device Rejected%=0.0916,Pool Rejected%=0.0930,Pool Stale%=0.0000,Last getwork=0 |
 
-##  3.3.  查询矿机详细信息
+##  3.3.  查询矿机详细信息（注意：此接口将废除）
 
-| 命令说明                | 查询矿机当前状态详细信息。                                   |
+| 命令说明                | 查询矿机当前状态详细信息。注意：此接口将在后续版本中废除，<br />请勿依赖该接口提供的数据进行二次开发 |
 | ----------------------- | ------------------------------------------------------------ |
 | 命令格式                | estats                                                       |
 | 举例（使用linux socat） | echo -n "estats"   \| socat -t 30 stdio tcp:192.168.189.135:4028,shut-none && echo |

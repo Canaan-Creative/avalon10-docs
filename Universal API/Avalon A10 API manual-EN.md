@@ -1,4 +1,4 @@
-# Avalon A10 API manual v0.2
+# Avalon A10 API manual v0.3
 
 
 
@@ -8,7 +8,7 @@
 | ------- | -------------- | ------------------------------------------------------------ |
 | v0.1    | 2019-8-31      | Create document.                                             |
 | v0.2    | 2019-10-12     | Add a new API description and add an example of the usage scenario description and return data. At the same time, the description of common CGMiner API  is added. |
-|         |                |                                                              |
+| v0.3    | 2011-11-08     | Add statement of deprecated API Usage.                       |
 |         |                |                                                              |
 
 
@@ -125,9 +125,9 @@
 | Scenes                  | This interface is called when you need to query the work information summary. You can get the miner's running time (Elapsed), average hash rate in 1 minute, 5 minutes, 15 minutes, the number of works accepted and rejected by the pool, etc. See the return information example below for details. |
 | Example of return value | SUMMARY,Elapsed=17994,MHS av=51278810.20,MHS 30s=51423478.12,MHS 1m=51209334.97,MHS 5m=51088640.16,MHS 15m=51312058.99,Found Blocks=0,Getworks=669,Accepted=1740,Rejected=2,Hardware Errors=10,Utility=5.80,Discarded=0,Stale=0,Get Failures=0,Local Work=419458,Remote Failures=0,Network Blocks=24,Total MH=921456687985.0000,Work Utility=716041.36,Difficulty Accepted=211156992.00000000,Difficulty Rejected=196608.00000000,Difficulty Stale=0.00000000,Best Share=459832747,Device Hardware%=0.0000,Device Rejected%=0.0916,Pool Rejected%=0.0930,Pool Stale%=0.0000,Last getwork=0 |
 
-##  3.3.  Query detail information
+##  3.3.  Query detail information(Deprecated API)
 
-| Note                    | Query miner's detail information                             |
+| Note                    | Query miner's detail information. Warning: This API will be deprecated. |
 | ----------------------- | ------------------------------------------------------------ |
 | Format                  | estats                                                       |
 | example(linux   socat)  | echo -n "estats"   \| socat -t 30 stdio tcp:192.168.189.135:4028,shut-none && echo |
