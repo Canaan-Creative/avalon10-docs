@@ -1,4 +1,4 @@
-# Avalon A10 API manual v0.3
+# Avalon A10 API manual v0.4
 
 
 
@@ -9,7 +9,7 @@
 | v0.1    | 2019-8-31      | Create document.                                             |
 | v0.2    | 2019-10-12     | Add a new API description and add an example of the usage scenario description and return data. At the same time, the description of common CGMiner API  is added. |
 | v0.3    | 2011-11-08     | Add statement of deprecated API Usage.                       |
-|         |                |                                                              |
+| v0.4    | 2020-3-2       | Cancled statement of deprecated API Usage.                   |
 
 
 
@@ -82,9 +82,27 @@
 | Scenes                  | When you need to modify the mine, miner, and miner passwords for the miner, you need to call this API . <br />Note: The configuration will take effect after reboot. |
 | Example of return value | STATUS=I,When=8337,Code=118,Msg=ASC 0 set info:<br/>pool success set to stratum+tcp://btc.ss.poolin.com:443<br />worker is cctrix.001<br />workerpassword is 123<br />Please reboot miner to make config work.<br />,Description=cgminer 4.11.1 |
 
- 
+###  2.6.  Set IP address
 
-## 2.6.  Shut down HASH power
+| Note                   | set miner's IP address                                       |
+| ---------------------- | ------------------------------------------------------------ |
+| Format                 | ascset\|0,ip,\<mode\>,\<ip\>,\<mask\>,\<gw\>                 |
+| Arguments              | \<mode\>,s：static IP.      d：dynamic IP（DHCP）。<br>\<ip\>,miner's IP to be setted ,only in static IP.<br/>\<mask\>,mask for sub net ,only in static IP.<br/>\<gw\>，gateway ,only in static IP. |
+| Example(linux   socat) | set miner 192.168.189.135  to static IP：192.168.193.223<br/>echo -n   "ascset\|0,ip,s,192.168.193.223,255.255.255.0,192.168.193.1" \| socat -t 30 stdio   tcp:192.168.189.135:4028,shut-none && echo<br/>set miner 192.168.189.135 to dynamic IP（DHCP）<br/>echo -n   "ascset\|0,ip,d" \|socat -t 30 stdio   tcp:192.168.189.135:4028,shut-none && echo |
+
+
+
+## 2.7. Set miner's DNS
+
+| Note                   | Set miner's DNS .                                            |
+| :--------------------- | ------------------------------------------------------------ |
+| Format                 | ascset\|0,dns,\<DNS1>,\<DNS2\>                               |
+| Arguments              | \<DNS1>,DNS address<br>\<DNS2\>，off-duty DNS.               |
+| example（linux socat） | set miner 192.168.189.135 DNS to 8.8.8.8，off-duty DNS to 114.114.114.114<br/>echo -n   "ascset\|0,dns,8.8.8.8,114.114.114.114"\|socat -t 30 stdio   tcp:192.168.189.135:4028,shut-none && echo |
+
+
+
+## 2.8.  Shut down HASH power
 
 | Note                    | Shut down the   HASH power supply to make the miner enter the low power state. To return to   the working state, use the reboot API command. |
 | ----------------------- | ------------------------------------------------------------ |
@@ -93,7 +111,7 @@
 | Scenes                  | If you need to shut down the mining machine remotely, you can use this API. Note that using this interface only turns off the power output to the HASH board. The power to the control board and fans will not be cut off. If you need to restart to hash , you need to call the reboot API . |
 | Example of return value | STATUS=I,When=20159,Code=118,Msg=ASC 0 set info: Power off hash now ...,Description=cgminer 4.11.1 |
 
-## 2.7.  Query HASH power state
+## 2.9.  Query HASH power state
 
 | Note                    | Read Hash power   status.                                    |
 | ----------------------- | ------------------------------------------------------------ |
@@ -125,7 +143,7 @@
 | Scenes                  | This interface is called when you need to query the work information summary. You can get the miner's running time (Elapsed), average hash rate in 1 minute, 5 minutes, 15 minutes, the number of works accepted and rejected by the pool, etc. See the return information example below for details. |
 | Example of return value | SUMMARY,Elapsed=17994,MHS av=51278810.20,MHS 30s=51423478.12,MHS 1m=51209334.97,MHS 5m=51088640.16,MHS 15m=51312058.99,Found Blocks=0,Getworks=669,Accepted=1740,Rejected=2,Hardware Errors=10,Utility=5.80,Discarded=0,Stale=0,Get Failures=0,Local Work=419458,Remote Failures=0,Network Blocks=24,Total MH=921456687985.0000,Work Utility=716041.36,Difficulty Accepted=211156992.00000000,Difficulty Rejected=196608.00000000,Difficulty Stale=0.00000000,Best Share=459832747,Device Hardware%=0.0000,Device Rejected%=0.0916,Pool Rejected%=0.0930,Pool Stale%=0.0000,Last getwork=0 |
 
-##  3.3.  Query detail information(Deprecated API)
+##  3.3.  Query detail information
 
 | Note                    | Query miner's detail information. Warning: This API will be deprecated. |
 | ----------------------- | ------------------------------------------------------------ |
